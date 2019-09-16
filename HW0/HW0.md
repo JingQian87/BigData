@@ -18,9 +18,13 @@
 
 #### 1. Warm-up exercises
 
-**1)**
+**1)**![Screen Shot 2019-09-15 at 11.35.30 PM](/Users/mac/Desktop/BigData/HW0/Screen Shot 2019-09-15 at 11.35.30 PM.png)
 
+![Screen Shot 2019-09-15 at 11.36.59 PM](/Users/mac/Desktop/BigData/HW0/Screen Shot 2019-09-15 at 11.36.59 PM.png)
 
+![Screen Shot 2019-09-15 at 11.37.59 PM](/Users/mac/Desktop/BigData/HW0/Screen Shot 2019-09-15 at 11.37.59 PM.png)
+
+![Screen Shot 2019-09-15 at 11.55.35 PM](/Users/mac/Desktop/BigData/HW0/Screen Shot 2019-09-15 at 11.55.35 PM.png)
 
 **2)**
 
