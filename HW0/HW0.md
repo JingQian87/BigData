@@ -48,7 +48,7 @@
 
 ####3. Understanding William Shakespeare
 
-**1)**
+**1)** The top 5 frequent words without any text preprocessing are: [('the', 604), ('and', 409), ('of', 389), ('to', 359), ('I', 263)].
 
 
 
