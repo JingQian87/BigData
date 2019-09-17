@@ -48,8 +48,8 @@
 
 ####3. Understanding William Shakespeare
 
-**1)** The top 5 frequent words without any text preprocessing are: [('the', 604), ('and', 409), ('of', 389), ('to', 359), ('I', 263)].
+**1)** The top 5 frequent words without any text preprocessing are: [('the', 620), ('and', 427), ('of', 396), ('to', 367), ('I', 326)].
 
 
 
-**2)** 
+**2)** 根据处理方式，比如是否用tokenize, 在哪一步扔掉punctuation，是否统一词型，都会影响最后结果。Piazza上说去不去都给分，可以分部分写。
