@@ -34,15 +34,15 @@
 
 #### 2. NYC Bike expert
 
-**1)**
+**1)** 843.
 
 
 
-**2)**
+**2)** The largest capacity for a station is 79. The *station_id* of stations that have the largest capacity are: 445, 422, 501.
 
 
 
-**3)**
+**3)** The total number of bikes available in region_id 70 is 394.
 
 
 
