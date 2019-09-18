@@ -1,0 +1,11 @@
+Instructions of BigQuery
+Jing Qian (09/18/2019)
+
+1. Build Project
+2. Connect billing
+3. Open BigQuery in console
+4. Click project name under "Resources", "CREATE DATASET" (all default)
+5. Click the dataset then "Create table"
+6. Choose "Upload" to upload table, under "Schema" click "Schema and input parameters" to enable "Auto detect".
+7. In the editor, input query.
+8. If no warnings, click "Run" and check query results.
