@@ -34,15 +34,17 @@
 
 #### 2. NYC Bike expert
 
-**1)** 843.
+**1)** There are 843 unique station_ids in this dataset.
 
-
+![Q2-1](/Users/mac/Desktop/BigData/HW0/Q2-1.png)
 
 **2)** The largest capacity for a station is 79. The *station_id* of stations that have the largest capacity are: 445, 422, 501.
 
-
+![Q2-2](/Users/mac/Desktop/BigData/HW0/Q2-2.png)
 
 **3)** The total number of bikes available in region_id 70 is 394.
+
+![Q2-3](/Users/mac/Desktop/BigData/HW0/Q2-3.png)
 
 
 
