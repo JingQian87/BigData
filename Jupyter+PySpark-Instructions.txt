@@ -7,8 +7,8 @@ Reference: https://cloud.google.com/dataproc/docs/tutorials/jupyter-notebook
 2. Create bucket in the project and upload data.
 3. Create a cluster and install the Jupyter component:
     * Enable Component gateway.
-    * Enter the name of the bucket (same as above).
-    * In the Advanced options, select the "Anaconda" and "Jupyter Notebook" components.
+    * In the Advanced options, enter the name of the bucket (same as above).
+    * In the Optional components, select the "Anaconda" and "Jupyter Notebook" components.
 4. Go to the cluster and select Jupyter in the Web Interfaces.
 5. Create new notebook with PySpark.
 
