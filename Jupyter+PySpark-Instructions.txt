@@ -1,0 +1,16 @@
+Jupyter+PySpark-Instructions
+Jing Qian (09/19/2019)
+
+Reference: https://cloud.google.com/dataproc/docs/tutorials/jupyter-notebook
+
+1. Create GCP project, add billing and enable Dataproc.
+2. Create bucket in the project and upload data.
+3. Create a cluster and install the Jupyter component:
+    * Enable Component gateway.
+    * Enter the name of the bucket (same as above).
+    * In the Advanced options, select the "Anaconda" and "Jupyter Notebook" components.
+4. Go to the cluster and select Jupyter in the Web Interfaces.
+5. Create new notebook with PySpark.
+
+Practice for PySpark see TrySpark.ipynb.
+Import file via their url "gs://shakes0/shakes.txt", not link url.
