@@ -52,6 +52,6 @@
 
 **1)** The top 5 frequent words without any text preprocessing are: [('the', 620), ('and', 427), ('of', 396), ('to', 367), ('I', 326)].
 
+![Q3-1](/Users/mac/Desktop/BigData/HW0/Q3-1.png)
 
-
-**2)** 根据处理方式，比如是否用tokenize, 在哪一步扔掉punctuation，是否统一词型，都会影响最后结果。Piazza上说去不去都给分，可以分部分写。
+**2)**  Top 5 frequent words by filtering out stop words provided by NLTK package are:  [('I', 346), ('And', 170), ('not', 165), ('with', 143), ('be', 138)]. Notice here I also removed the punctuations or the counted words will include punctuations.![Q3-2](/Users/mac/Desktop/BigData/HW0/Q3-2.png)
