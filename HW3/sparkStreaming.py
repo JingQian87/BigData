@@ -154,15 +154,15 @@ if __name__ == '__main__':
     dataStream = ssc.socketTextStream(IP, PORT)
     dataStream.pprint()
 
-    words = dataStream.flatMap(lambda line: line.split(" "))
+    # words = dataStream.flatMap(lambda line: line.split(" "))
 
-    # calculate the accumulated hashtags count sum from the beginning of the stream
-    topTags = hashtagCount(words)
-    topTags.pprint()
+    # # calculate the accumulated hashtags count sum from the beginning of the stream
+    # topTags = hashtagCount(words)
+    # topTags.pprint()
 
-    # Calculte the word count during each time period 60s
-    wordCount = wordCount(words)
-    wordCount.pprint()
+    # # Calculte the word count during each time period 60s
+    # wordCount = wordCount(words)
+    # wordCount.pprint()
 
     # save hashtags count and word count to google storage
     # used to save to google BigQuery
@@ -182,7 +182,7 @@ if __name__ == '__main__':
     ssc.stop(stopSparkContext=False, stopGraceFully=True)
 
     # put the temp result in google storage to google BigQuery
-    saveToBigQuery(sc, output_dataset, output_table_hashtags, output_directory_hashtags)
-    saveToBigQuery(sc, output_dataset, output_table_wordcount, output_directory_wordcount)
+    # saveToBigQuery(sc, output_dataset, output_table_hashtags, output_directory_hashtags)
+    # saveToBigQuery(sc, output_dataset, output_table_wordcount, output_directory_wordcount)
 
 
