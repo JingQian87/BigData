@@ -34,7 +34,7 @@ import re
 from google.cloud import bigquery
 
 # global variables
-bucket = ""    # TODO : replace with your own bucket name
+bucket = "bucket-hw3"    # TODO : replace with your own bucket name
 output_directory_hashtags = 'gs://{}/hadoop/tmp/bigquery/pyspark_output/hashtagsCount'.format(bucket)
 output_directory_wordcount = 'gs://{}/hadoop/tmp/bigquery/pyspark_output/wordcount'.format(bucket)
 
@@ -154,15 +154,15 @@ if __name__ == '__main__':
     dataStream = ssc.socketTextStream(IP, PORT)
     dataStream.pprint()
 
-    # words = dataStream.flatMap(lambda line: line.split(" "))
+    words = dataStream.flatMap(lambda line: line.split(" "))
 
-    # # calculate the accumulated hashtags count sum from the beginning of the stream
-    # topTags = hashtagCount(words)
-    # topTags.pprint()
+    # calculate the accumulated hashtags count sum from the beginning of the stream
+    topTags = hashtagCount(words)
+    topTags.pprint()
 
-    # # Calculte the word count during each time period 60s
-    # wordCount = wordCount(words)
-    # wordCount.pprint()
+    # Calculte the word count during each time period 60s
+    wordCount = wordCount(words)
+    wordCount.pprint()
 
     # save hashtags count and word count to google storage
     # used to save to google BigQuery
