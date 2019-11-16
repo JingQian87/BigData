@@ -24,7 +24,18 @@ In d3.js, enter() and exit() are operations that used in joining an array of dat
 
 **1.3**
 
-In SVG, transform is 
+In SVG, transform functions are used for geometric manipulations on the SVG elements, including translation (movement), rotation, scale, and skew (shear). 
 
-translate is
+A translation moves all the points of an element in the same direction and by the same amount. Translation preserves parallelism, angles and distances.
 
+
+
+**1.4**
+
+The anonymous function a.map(function(d,i){return i+5}) here equals to the following command in Python: [i+5 for i in range(len(a))]. So the return value of the anonymous function is: [5, 6, 7, 8, 9]. 需要描述anonymous function或者map吗？对于定义还是有点迷茫。
+
+
+
+
+
+###### 2. Modify the sample code to get desired figure.
