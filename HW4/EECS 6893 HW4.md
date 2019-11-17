@@ -36,6 +36,16 @@ The anonymous function a.map(function(d,i){return i+5}) here equals to the follo
 
 
 
-
-
 ###### 2. Modify the sample code to get desired figure.
+
+The screenshots of codes and the output bar-chart are as following:
+
+![Q1-1](/Users/mac/Desktop/BigData/HW4/Q1-1.png)
+
+![Q1-2](/Users/mac/Desktop/BigData/HW4/Q1-2.png)
+
+![Q1-3](/Users/mac/Desktop/BigData/HW4/Q1-3.png)
+
+
+
+### Problem 2
