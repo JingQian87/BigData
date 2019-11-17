@@ -23,9 +23,9 @@ function HW4_Q1(){
             .enter()
             .append("text")
             .attr("class", "textlabel")
-            .attr("transform", function(d, i) { return "translate(" + (i * 55+15) + ","+(svgHeight-d-2)+")"; })
+            .attr("transform", function(d, i) { return "translate(" + (i * 55+25) + ","+(svgHeight-d-2)+")"; })
+            .attr("text-anchor", "middle")
             .style("font-family", "Arial")
             .style("color", "#333333")
             .text(function(d){return d;});
-
 }

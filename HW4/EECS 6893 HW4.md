@@ -34,7 +34,7 @@ A translation moves all the points of an element in the same direction and by th
 
 **1.4**
 
-The anonymous function a.map(function(d,i){return i+5}) here equals to the following command in Python: [i+5 for i in range(len(a))]. So the return value of the anonymous function is: [5, 6, 7, 8, 9]. 需要描述anonymous function或者map吗？对于定义还是有点迷茫。
+The function without a name is called an "anonymous function". In d3, we use them primarily to gain access to bound data. The anonymous function a.map(function(d,i){return i+5}) here equals to the following command in Python: [i+5 for i, d in enumerate(a)]. So the return value of the anonymous function is: [5, 6, 7, 8, 9].
 
 
 
@@ -72,7 +72,7 @@ The screenshots of codes and the output bar-chart are as following:
 
 Modify the view.py:
 
-![view2](/Users/mac/Desktop/BigData/HW4/view2.png)
+![view2](/Users/mac/Desktop/BigData/HW4/Q3-1.png)
 
 
 
@@ -80,7 +80,7 @@ Modify the dashboard.js
 
 ![Screen Shot 2019-11-17 at 4.33.38 AM](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 4.33.38 AM.png)
 
-![Screen Shot 2019-11-17 at 4.33.58 AM](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 4.33.58 AM.png)
+![Screen Shot 2019-11-17 at 4.33.58 AM](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 11.26.16 AM.png)
 
 ![Screen Shot 2019-11-17 at 4.34.17 AM](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 4.34.17 AM.png)
 
@@ -88,7 +88,9 @@ Modify the dashboard.js
 
 Result:
 
-![Screen Shot 2019-11-17 at 4.34.41 AM](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 4.30.21 AM.png)
+![Q2-result1](/Users/mac/Desktop/BigData/HW4/Q2-result1.png)
+
+![Q2-result2](/Users/mac/Desktop/BigData/HW4/Q2-result2.png)
 
 
 
@@ -99,8 +101,6 @@ Based on the edge.csv and node.csv provided by TA, the view.py is modified as fo
 ![view3](/Users/mac/Desktop/BigData/HW4/view3.png)
 
 Modified connection.js:
-
-![Q3-1](/Users/mac/Desktop/BigData/HW4/Q3-1.png)
 
 ![Q3-2](/Users/mac/Desktop/BigData/HW4/Q3-2.png)
 

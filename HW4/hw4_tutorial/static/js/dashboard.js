@@ -52,8 +52,8 @@ function dashboard(id, fData) {
 
         //create the rectangles.
         bars.append("rect")
-            .attr("x", function (d,i) {return i*x.rangeBand()*1.1+10;}/* TO FINISH */)
-            .attr("y", hGDim.b/* TO FINISH */)
+            .attr("x", function (d){return x(d[0])}/* TO FINISH */)
+            .attr("y", function (d){return y(d[1])}/* TO FINISH */)
             .attr("width", x.rangeBand())
             .attr("height", function (d) {
                 return hGDim.h - y(d[1]);
@@ -69,7 +69,7 @@ function dashboard(id, fData) {
             .attr("x", function (d) {
                 return x(d[0])/* TO FINISH */ + x.rangeBand() / 2;
             })
-            .attr("y", hGDim.b+5/* TO FINISH */)
+            .attr("y", y(d[1])-5/* TO FINISH */)
             .attr("text-anchor", "middle");
 
         function mouseover(d) {  // utility function to be called on mouseover.

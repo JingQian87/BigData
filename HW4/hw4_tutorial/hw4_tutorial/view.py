@@ -31,7 +31,7 @@ def dashboard(request):
                   ]
         }
     '''
-    SQL = "select * from datasetHW3.wordcount2 limit 8"
+    SQL = "select * from datasetHW3.wc2 limit 8"
     df = pandas_gbq.read_gbq(SQL)
     #print(df)
     data = {}
