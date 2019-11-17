@@ -1,3 +1,5 @@
+
+
 ## EECS 6893 HW4
 
 #### Jing Qian (jq2282)
@@ -49,3 +51,65 @@ The screenshots of codes and the output bar-chart are as following:
 
 
 ### Problem 2
+
+**Step 1: Data processing**
+
+![Q2-1](/Users/mac/Desktop/BigData/HW4/Q2-1.png)
+
+![Q2-query](/Users/mac/Desktop/BigData/HW4/Q2-query.png)
+
+
+
+**Step 2: Create Django project**
+
+![Q2-2](/Users/mac/Desktop/BigData/HW4/Q2-2.png)
+
+![Q2-3](/Users/mac/Desktop/BigData/HW4/Q2-3.png)
+
+
+
+**Step 3. Finish the code**
+
+Modify the view.py:
+
+![view2](/Users/mac/Desktop/BigData/HW4/view2.png)
+
+
+
+Modify the dashboard.js
+
+![Screen Shot 2019-11-17 at 4.33.38 AM](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 4.33.38 AM.png)
+
+![Screen Shot 2019-11-17 at 4.33.58 AM](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 4.33.58 AM.png)
+
+![Screen Shot 2019-11-17 at 4.34.17 AM](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 4.34.17 AM.png)
+
+![](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 4.34.41 AM.png)
+
+Result:
+
+![Screen Shot 2019-11-17 at 4.34.41 AM](/Users/mac/Desktop/BigData/HW4/Screen Shot 2019-11-17 at 4.30.21 AM.png)
+
+
+
+### Problem 3
+
+Based on the edge.csv and node.csv provided by TA, the view.py is modified as following:
+
+![view3](/Users/mac/Desktop/BigData/HW4/view3.png)
+
+Modified connection.js:
+
+![Q3-1](/Users/mac/Desktop/BigData/HW4/Q3-1.png)
+
+![Q3-2](/Users/mac/Desktop/BigData/HW4/Q3-2.png)
+
+![Q3-3](/Users/mac/Desktop/BigData/HW4/Q3-3.png)
+
+![Q3-4](/Users/mac/Desktop/BigData/HW4/Q3-4.png)
+
+![Q3-5](/Users/mac/Desktop/BigData/HW4/Q3-5.png)
+
+Result:
+
+![Q3-result](/Users/mac/Desktop/BigData/HW4/Q3-result.png)
