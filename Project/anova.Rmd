@@ -1,0 +1,37 @@
+---
+title: "anova"
+output: html_notebook
+---
+
+## 1. Load data
+```{r}
+library(bigmemory)
+data<-read.delim("~/Desktop/BigData_ProjectData/SPARCS-2017-Nobirth-Bias.csv")
+```
+
+## 2. Process factor data
+```{r}
+y<-data$Total.Charges
+
+sex<-as.factor(data$Gender)
+race<-as.factor(data$Race)
+age<-factor(data$Age.Group,order=TRUE,level=c('0 to 17', '18 to 29', '30 to 49', '50 to 69', '70 or Older'))
+length<-as.numeric(data$Length.of.Stay)
+area<-as.factor(data$Hospital.Service.Area)
+```
+
+```{r}
+interaction.plot(race,sex,y)
+```
+
+
+```{r}
+anova(lm(y~race+sex+age+length+area))
+
+```
+
+```{r}
+fit1<-lm(y~race+sex+age+length+area)
+summary(fit1)
+```
+
