@@ -8,8 +8,8 @@
   <link rel = "stylesheet" type = "text/css" href = "../static/css/style.css">
 </head>
 <body>
-  <script src="{% static "js/bias.js" %}"></script>
-  <script src="{% static "js/script.js" %}"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
   <h1> New York State Healthcare Analysis </h1>
   <button class="tablink" onclick="openPage('home', this, 'red')">Home</button>
   <button class="tablink" onclick="openPage('dashboard', this, 'green')" >Dashboard</button>
@@ -20,12 +20,12 @@
     <h3>Bias in Inpatient Healthcare Costs</h3>
     <p>Our analysis of the dataset helped uncover interesting patterns and trends in healthcare costs across various individual features. To enable users to relate better to the data results, we specifically looked at how biases in healthcare costs varied from region to region in the state of New York. [add more content]</p>
   </div>
-
-  <svg class="bias-diagram"></svg>
-  <script src="https://d3js.org/d3.v3.min.js"></script>
-  <script>
-    var Data = {{ data | safe }}
-    bias_display('#bias', Data)
-  </script>
+  <div id="bias-dashboard">
+    <svg id="new_york_bias_map"></svg>
+    <svg id="new_york_gender_bias"></svg>
+    <svg id="new_york_race_bias"></svg>
+  </div>
+    <script src="{% static "js/bias.js" %}"></script>
+  <script src="{% static "js/script.js" %}"></script>
 </body>
 </html> 
