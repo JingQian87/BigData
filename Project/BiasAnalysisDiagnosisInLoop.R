@@ -1,5 +1,5 @@
 library(bigmemory)
-data<-read.delim("~/Desktop/BigData_ProjectData/SPARCS-2017-septicemia-Bias.csv")
+data<-read.delim("~/Desktop/BigData_ProjectData/SPARCS-2017-hypertension-Bias.csv")
 county_names<-unique(data$Hospital.County)
 # screen the variables with 1 level for each county
 flist<-c()
@@ -19,17 +19,18 @@ for (iname in county_names)
 {
   subdata<-data[data$Hospital.County==iname,]
   y<-subdata$Average.Charges
-  age<-factor(data$Age.Group,order=TRUE,level=c("0 to 17","18 to 29","30 to 49", "50 to 69", "70 or Older"))
+  if(length(unique(subdata$Age.Group))<5) next
+  age<-factor(subdata$Age.Group,order=TRUE,level=c("0 to 17","18 to 29","30 to 49", "50 to 69", "70 or Older"))
   gender<-as.factor(subdata$Gender)
-  #race<-as.factor(subdata$Race)
+  if(length(unique(subdata$Race))<4) next
+  race<-as.factor(subdata$Race)
   #ethnity<-as.factor(subdata$Ethnicity)
   #admission<-as.factor(subdata$Type.of.Admission)
   disposition<-as.factor(subdata$Patient.Disposition)
   severity<-factor(subdata$APR.Severity.of.Illness.Description,order=TRUE,level=c("Minor", "Moderate", "Major", "Extreme"))
   mortality<-factor(subdata$APR.Risk.of.Mortality,order=TRUE,level=c("Minor", "Moderate", "Major", "Extreme"))
   #emergency<-as.factor(subdata$Emergency.Department.Indicator)
-
-  fit1<-lm(y~age+gender+disposition+severity+mortality)
+  fit1<-lm(y~age+gender+race+disposition+severity+mortality)
   t1<-summary(aov(fit1))[[1]][["Pr(>F)"]]
   bias<-rbind(bias, c(iname, t1[1]<0.05, t1[2]<0.05))
   #cat(iname,",race bias:",t1[1]<0.05,"; gender bias:",t1[2]<0.05,".\n")
@@ -55,15 +56,18 @@ for (iname in county_names)
 {
   subdata<-data[data$Hospital.County==iname,]
   y<-subdata$Average.Charges
+  if(length(unique(subdata$Age.Group))<5) next
+  age<-factor(subdata$Age.Group,order=TRUE,level=c("0 to 17","18 to 29","30 to 49", "50 to 69", "70 or Older"))
   gender<-as.factor(subdata$Gender)
+  if(length(unique(subdata$Race))<4) next
   race<-as.factor(subdata$Race)
   #ethnity<-as.factor(subdata$Ethnicity)
   #admission<-as.factor(subdata$Type.of.Admission)
   disposition<-as.factor(subdata$Patient.Disposition)
   severity<-factor(subdata$APR.Severity.of.Illness.Description,order=TRUE,level=c("Minor", "Moderate", "Major", "Extreme"))
-  #mortality<-factor(subdata$APR.Risk.of.Mortality,order=TRUE,level=c("Minor", "Moderate", "Major", "Extreme"))
+  mortality<-factor(subdata$APR.Risk.of.Mortality,order=TRUE,level=c("Minor", "Moderate", "Major", "Extreme"))
   #emergency<-as.factor(subdata$Emergency.Department.Indicator)
-  fit1<-lm(y~race+gender+disposition+severity)
+  fit1<-lm(y~age+gender+race+disposition+severity+mortality)
   
   # compare the race difference
   tu<-TukeyHSD(aov(fit1),"race")
@@ -80,8 +84,44 @@ for (iname in county_names)
   }
   avg2white<-rbind(avg2white,ratio)
 }  
-colnames(avg2white)<-c("County","White",comlist)  
+colnames(avg2white)<-c("County","White",racelist)  
   
-write.csv(bias,"~/Desktop/BigData_ProjectData/birth-Bias-anova.csv")
-write.csv(avg2male,"~/Desktop/BigData_ProjectData/birth-avg2male-anova.csv")
-write.csv(avg2white,"~/Desktop/BigData_ProjectData/birth-avg2white-tukey.csv")
+
+agelist<-c("0 to 17", "18 to 29","30 to 49", "50 to 69")
+avg2old<-c()
+# Multi-level comparison
+for (iname in county_names)
+{
+  subdata<-data[data$Hospital.County==iname,]
+  y<-subdata$Average.Charges
+  if(length(unique(subdata$Age.Group))<5) next
+  age<-factor(subdata$Age.Group,order=TRUE,level=c("0 to 17","18 to 29","30 to 49", "50 to 69", "70 or Older"))
+  gender<-as.factor(subdata$Gender)
+  if(length(unique(subdata$Race))<4) next
+  race<-as.factor(subdata$Race)
+  disposition<-as.factor(subdata$Patient.Disposition)
+  severity<-factor(subdata$APR.Severity.of.Illness.Description,order=TRUE,level=c("Minor", "Moderate", "Major", "Extreme"))
+  mortality<-factor(subdata$APR.Risk.of.Mortality,order=TRUE,level=c("Minor", "Moderate", "Major", "Extreme"))
+  fit1<-lm(y~age+gender+race+disposition+severity+mortality)
+  
+  # compare the race difference
+  tu<-TukeyHSD(aov(fit1),"age")
+  ratio<-cbind(iname,100)
+  for (icom in agelist){
+    if(is.na(tu[[1]][,"p adj"][paste("70 or Older",icom,sep="-")]))
+    {ratio<-cbind(ratio,0)}
+    else{
+      if(tu[[1]][,"p adj"][paste("70 or Older",icom,sep="-")]>0.05)
+      {ratio<-cbind(ratio,100)}
+      else
+      {ratio<-cbind(ratio,round(100*mean(subdata[subdata$Age.Group==icom,]$Average.Charges)/mean(subdata[subdata$Age.Group=="70 or Older",]$Average.Charges),digits=2))}
+    }
+  }
+  avg2old<-rbind(avg2old,ratio)
+}  
+colnames(avg2old)<-c("County","70 or Older",agelist)  
+
+write.csv(bias,"~/Desktop/BigData_ProjectData/hypertension-Bias-anova.csv")
+write.csv(avg2male,"~/Desktop/BigData_ProjectData/hypertension-avg2male-anova.csv")
+write.csv(avg2white,"~/Desktop/BigData_ProjectData/hypertension-avg2white-tukey.csv")
+write.csv(avg2old,"~/Desktop/BigData_ProjectData/hypertension-avg2old-tukey.csv")
