@@ -185,7 +185,7 @@ In the bias analysis, we experimented with top tour diagnosis categories: "Liveb
 \begin{table}[]
 \small
 \begin{center}
-\label{anova}
+\label{anova1}
 \begin{tabular}{|l|l|l|}
 \hline
 \textbf{Variable} & \textbf{DoF} & \textbf{Pr(\textgreater{}F)} \\ \hline
@@ -204,13 +204,17 @@ surgical          & 1            & \textless{}2.2e-16 ***       \\ \hline
 \caption{ANOVA result for Septicemia in the New York State. Significant codes: '***' 0.001.}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In Table. \ref{anova}, we show the ANOVA result for Septicemia in the New York State. The first column is the 10 variables, the second column is the degree of freedom (DoF) of each variable (DoF equals to the number of groups in a feature minus one. For example, there are 5 age groups and hence the DoF of age is 4.) and the third column is Pr($>$F) which is the p-value associated with the F statistic of corresponding variable. As mentioned in the Method section, the null hypothesis that the corresponding variable has no effect on the independent variable (here is the mean discharge cost) is evaluated with regard to this p-value. Since we choose p-value as 0.05 by convention, if a variable has Pr($>$F) less than 0.05, we would consider this variable as a significant feature of predicting the mean discharge cost. 
+In Table. 1, we show the ANOVA result for Septicemia in the New York State. The first column is the 10 variables, the second column is the degree of freedom (DoF) of each variable (DoF equals to the number of groups in a feature minus one. For example, there are 5 age groups and hence the DoF of age is 4.) and the third column is Pr($>$F) which is the p-value associated with the F statistic of corresponding variable. As mentioned in the Method section, the null hypothesis that the corresponding variable has no effect on the independent variable (here is the mean discharge cost) is evaluated with regard to this p-value. Since we choose p-value as 0.05 by convention, if a variable has Pr($>$F) less than 0.05, we would consider this variable as a significant feature of predicting the mean discharge cost. We could see that for the mean discharge cost of Septicemia in the New York State, all 10 features are significant. Gender, racial, age and geographical/county bias do exist in the mean discharge cost of Septicemia in the New York State. We found similar bias in both diagnosis categories Hypertension and Osteoarthritis. In Liveborn, although there is no age feature and hence no age bias, other 9 features all turned to be significant to the mean discharge cost.
 
+Since there exists gender, racial, age and geographical/county bias in the mean discharge cost of various diagnosis categories in the New York State, we continued the analysis with Tukey's method to find the difference among groups. We started the multiple comparison test on the Liveborn diagnosis regarding race, gender and county (no age, as explained above). The averaged mean discharge cost on Liveborn among all people are around \$4300. We found that the female babies spent significantly less money on discharge than male. As to counties, some counties have significant difference while some are not. The difference between any two racial groups are significant, and ordering from low cost to high cost are: white people, black/African American (white+\$70), other races  (white+\$652) and finally multi-racial  (white+\$2277). More clarifications on the race of "other races" and "multi-racial" are needed to understand why the difference is so large.
+
+As shown by the correlation matrix in Data Preprocessing section, there is low-to-moderate correlation between race and county. Also, previous ANOVA showed that county is a significant feature to the mean discharge cost. If we do our analysis with the New York State as a whole, some geographical patterns may get smoothed. We would like to know how the racial, gender and age bias vary from place to place. Therefore, we filtered our data by its county and did the ANOVA and Tukey's method for each county. However, when we did the bias analysis for each county, a new problem appeared: because of the data splitting, some of the counties may lack feature diversification and hence the original model would not work. For example, in county Otsego, there is no female Liveborn records in the state health system in 2017. Then gender should not be considered as a feature if we do a regression model for the Liveborn data in Otsego. Similar situation appear on features Surgical, Ethnity and others. To make a consistent comparison of the bias across all the counties, we used a reduced model which includes 5 features (Gender, Race, Patient Disposition, APR Severity and APR risk of Mortality). For the diagonsis Septicemia, Hypertension and Osteoarthritis, we acutally had 6, with an extra feature "Age Group".
+
+The output of Tukey's method in R is the difference between two group means and the p-value of this difference. For better understanding the difference between groups in features, we showed the scaled cost instead of the difference from Tukey. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 \small
 \begin{center}
-\label{Tukey-race-birth}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{County} & \textbf{White} & \textbf{Black} & \textbf{Other} & \textbf{Multi} \\ \hline
@@ -222,9 +226,13 @@ Bronx           & 100            & 100            & 165.25         & 143.13     
 \end{tabular}
 \end{center}
 \caption{Mean dischage costs per day on "Liveborn" of different racial groups inferred from Tukey's method. Take group "White" as the baseline (\$100) and scale the cost for other groups. Only show 5 counties for brevity.}
+\label{Tukey-race-birth}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Table. 2 showed the mean discharge costs per day on "Liveborn" of different racial groups inferred from Tukey's method. We took group "White" as the baseline and set the mean discharge costs for White to \$100 per day. We took the pairwise comparison result between three other groups: "Black", "Other" and "Multi" with "White" from Tukey's method's output. If the difference is significant, we scaled the mean discharge costs of that group regarding White is \$100. For example, the scaled black = original black/original white * 100 if there is significant difference between "White" and "Black". If the difference is not significant, we just set the scaled value as \$100. If there is no data in certain group in the county, we set the value as \$0. We did the analysis for all the counties and just show random 5 in this table.
+We could see from Table. 2 that each county did have different racial bias. In county Onondaga, we did not observe significant difference between other three racial groups and white people in "Liveborn" in 2017. In Westchester, for every \$100 white people spent on Liveborn, black people spent \$115 while in Manhattan, black people only spent \$89.
 
+Similarly, in Table. 3, we showed the gender bias in "Liveborn" for each county. Here we take male as the baseline. The pattern is quite homogeneous here: female spent less money on mean discharge costs in all the counties. If we look into other diagonsis, the same bias exist too. In fact, some counties don't have female records for certain diagnosis in 2017. It is an interesting phenomenon. Does it suggest that female are healthier? Or do the health facilities tend to perform excessive treatment on males? Or there is undertreatment on females? We may need more research to get this answer.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[]
 \small
@@ -244,7 +252,7 @@ Bronx           & 100           & 96.61           \\ \hline
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+To illustrate the age bias in the mean discharge cost, we chose the second top diagnosis "Septicemia" because there is no age bias in the top one "Liveborn". Using the similar calculation way, we could see that the age bias differ from county to county. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[t!]
 \small
@@ -262,9 +270,6 @@ Bronx           & 100                  & 100              & 88.39             & 
 \caption{Mean dischage costs per day on "Septicemia" of different age groups inferred from Tukey's method. Take group "$\ge 70$" as the baseline (\$100) and scale the cost for other groups. Only show 5 counties for brevity.}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 
 % [TALK ABOUT SOME EXP ABOUT NN]
 We have included in Table 1 a summary of the performance between the two approaches to implementing a healthcare cost prediction model. The results indicate that in contrast to our expectations, neural networks yielded better performance as shown by the significantly lower RMSE value. All models used in the experiment are trained on the same subset of 1 million records randomly sampled from the SPARCS 2017 data set. As we can see, neural network depth does not appear to have much impact on prediction performance. This may be driven by the sparsity of the vectorized features. Without a truly deep neural network it does not seem likely that incremental increases in network depth will result in significant performance improvements. We also conducted experiments to test the performance of the neural networks using different hyper-parameters, including learning rate and type of optimizer. Table 2 summarizes the results from varying the learning rate hyper-parameter and suggest that learning rate can significantly affect the supervised learning process and resulting performance. Similarly, Table 3 shows the the result from varying the optimizer, indicating that the Adam optimizer yielded the best performance for the 3-layer network. Finally in Table 4, we show the impact of varying maximum tree depth and iteration on the Gradient Boosted Regressor model. For all models, the selected features were vectorized into 63 ($\approx 2^6$) dimensional records, which explains how the model with maximum depth 10 tended to perform better.
