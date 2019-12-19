@@ -24,7 +24,7 @@ disposition<-as.factor(data$Patient.Disposition)
 severity<-factor(data$APR.Severity.of.Illness.Description,order=TRUE,level=c("Minor", "Moderate", "Major", "Extreme"))
 mortality<-factor(data$APR.Risk.of.Mortality,order=TRUE,level=c("Minor", "Moderate", "Major", "Extreme"))
 surgical<-as.factor(data$APR.Medical.Surgical.Description)
-emergency<-as.factor(data$Emergency.Department.Indicator)
+#emergency<-as.factor(data$Emergency.Department.Indicator)
 ```
 
 ## 3. Check interaction
@@ -36,7 +36,7 @@ interaction.plot(county,age,y)
 
 ## anova
 ```{r}
-fit1<-lm(y~age+gender+race+county+ethnity+admission+disposition+severity+mortality+surgical+emergency)
+fit1<-lm(y~age+gender+race+county+ethnity+admission+disposition+severity+mortality+surgical)
 #summary(fit1)
 ```
 
