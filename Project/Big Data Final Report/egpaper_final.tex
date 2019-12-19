@@ -175,7 +175,97 @@ As an experiment, we tested another approach for the prediction task using a sim
 %Discuss the experiments that you performed to demonstrate your approach solves the problem. The experiments will vary depending on the project, but you might compare with previously methods, determine the impact of the components of your system, experiment with different hyper-parameters, architectures, or algorithms, use visualization techniques to gain insight of how your model works, etc. Graphs, tables, and figures are highly recommended to be included to illustrate your experimental results.
 
 % [Talk about bias detection here as experiment... how did we experiment with variables to identify "across which feature does healthcare cost bias exist?"]
-After feature selection, we successfully reduced our feature numbers to 10 [jq2282 which 10 features? can you include table please]. Here we took the top diagnosis category - `Liveborn' (over 9\% of the whole data) as an example to demonstrate the bias analysis. It is worth noticing that the patients of `Liveborn' are newborns, not the mothers. There is only one age category: between 0 and 17 and hence no possible age bias. However, there is a possibility that there are gender biases among the newborns. To test for this, we used ANOVA to test for which features of records were significant in explaining the variance in healthcare costs. From our ANOVA analysis, we could see that all these ten features were significant in explaining the mean charges for `Liveborn'.
+We started our data experiments with the bias analysis as mentioned in the Methods section. As mentioned above, after feature selection, we successfully reduced our feature numbers to 10 (Hospital County, Age Group, Gender, Race, Ethnity, Type of Admission, Patient Disposition, APR Severity of Illness Description, APR Risk of Mortality and APR Medical Surgical Description). 
+
+We know from common sense that diagnosis and corresponding medical procedures would play an important role in the mean discharge costs. However, the large number of groups in the diagnosis hinders it from being an independent categorical variable for predicting the mean costs. One way to solve this problem is to use hierarchical modeling, which means we first split the categories into several large groups, model and do bias analysis and then the large groups are further broken down into low-level small groups and do the modeling and analysis correspondingly. This method needs deep medical knowledge and in fact, we don't need such intense information to do the bias analysis. Our aim is to find whether bias existing in the mean cost and find significant features as candidates for our predictive model. For the business application, the users won't have the professional diagnosis knowledge to use the predictive model.  Therefore, instead of a comprehensive diagnosis hierarchical model, we use a relatively simple approach: do the bias analysis for individual diagnosis category. Considering the diagnosis distribution in the Data Exploration section, this approach is reasonable actually. Although there are over 200 groups in the diagnosis feature, most of the groups have very low frequency.
+
+In the bias analysis, we experimented with top tour diagnosis categories: "Liveborn" ($>$ 9\% of the whole data), "Septicemia" ($\sim$5\%), "Hypertension" ($\sim$3\%) and "Osteoarthritis" ($\sim$3\%).  It is worth noticing that the patients of `Liveborn' are newborns, not the mothers. There is only one age category: between 0 and 17 and hence no possible age bias. 
+
+We took the top diagnosis category - `Liveborn' (over 9\% of the whole data) as an example to demonstrate the bias analysis.However, there is a possibility that there are gender biases among the newborns. To test for this, we used ANOVA to test for which features of records were significant in explaining the variance in healthcare costs. From our ANOVA analysis, we could see that all these ten features were significant in explaining the mean charges for `Liveborn'.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t!]
+\small
+\begin{center}
+\label{anova}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Variable} & \textbf{DoF} & \textbf{Pr(\textgreater{}F)} \\ \hline
+county            & 56           & \textless{}2.2e-16 ***       \\ \hline
+age               & 4            & 5.4e-10 ***                  \\ \hline
+gender            & 1            & 5.9e-09 ***                  \\ \hline
+race              & 3            & \textless{}2.2e-16 ***       \\ \hline
+ethnity           & 3            & \textless{}2.2e-16 ***       \\ \hline
+admission         & 5            & 4.7e-14 ***                  \\ \hline
+disposition       & 18           & \textless{}2.2e-16 ***       \\ \hline
+severity          & 3            & \textless{}2.2e-16 ***       \\ \hline
+mortality         & 3            & \textless{}2.2e-16 ***       \\ \hline
+surgical          & 1            & \textless{}2.2e-16 ***       \\ \hline
+\end{tabular}
+\end{center}
+\caption{ANOVA result for Septicemia in New York State. Significant codes: '***' 0.001.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t!]
+\small
+\begin{center}
+\label{Tukey-race-birth}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{County} & \textbf{White} & \textbf{Black} & \textbf{Other} & \textbf{Multi} \\ \hline
+Westchester     & 100            & 114.76         & 100            & 100            \\ \hline
+Kings           & 100            & 100            & 111.54         & 130.57         \\ \hline
+Manhattan       & 100            & 89.14          & 91.59          & 111.72         \\ \hline
+Onondaga        & 100            & 100            & 100            & 100            \\ \hline
+Bronx           & 100            & 100            & 165.25         & 143.13         \\ \hline
+\end{tabular}
+\end{center}
+\caption{Mean dischage costs per day on "Liveborn" of different racial groups inferred from Tukey's method. Take group "White" as the baseline (\$100) and scale the cost for other groups. Only show 5 counties for brevity.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t!]
+\small
+\begin{center}
+\label{anova-gender-birth}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{County} & \textbf{Male} & \textbf{Female} \\ \hline
+Westchester     & 100           & 92.52           \\ \hline
+Kings           & 100           & 95.06           \\ \hline
+Manhattan       & 100           & 95.93           \\ \hline
+Onondaga        & 100           & 95.04           \\ \hline
+Bronx           & 100           & 96.61           \\ \hline
+\end{tabular}
+\end{center}
+\caption{Mean dischage costs per day on "Liveborn" of different gender groups inferred from Tukey's method. Take group "Male" as the baseline (\$100) and scale the cost for the other group. Only show 5 counties for brevity.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t!]
+\small
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{County} & \textbf{$\ge$70} & \textbf{0 - 17} & \textbf{18 - 29} & \textbf{30 - 49} & \textbf{50 - 69} \\ \hline
+Westchester     & 100                  & 174.16           & 114.23            & 115.71            & 110.54            \\ \hline
+Kings           & 100                  & 81.03            & 100               & 100               & 100               \\ \hline
+Manhattan       & 100                  & 100              & 93.97             & 96.21             & 100               \\ \hline
+Onondaga        & 100                  & 137.39           & 100               & 117.75            & 115.1             \\ \hline
+Bronx           & 100                  & 100              & 88.39             & 92.11             & 100               \\ \hline
+\end{tabular}
+\end{center}
+\caption{Mean dischage costs per day on "Septicemia" of different age groups inferred from Tukey's method. Take group "$\ge 70$" as the baseline (\$100) and scale the cost for other groups. Only show 5 counties for brevity.}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 % [TALK ABOUT SOME EXP ABOUT NN]
 We have included in Table 1 a summary of the performance between the two approaches to implementing a healthcare cost prediction model. The results indicate that in contrast to our expectations, neural networks yielded better performance as shown by the significantly lower RMSE value. All models used in the experiment are trained on the same subset of 1 million records randomly sampled from the SPARCS 2017 data set. As we can see, neural network depth does not appear to have much impact on prediction performance. This may be driven by the sparsity of the vectorized features. Without a truly deep neural network it does not seem likely that incremental increases in network depth will result in significant performance improvements. We also conducted experiments to test the performance of the neural networks using different hyper-parameters, including learning rate and type of optimizer. Table 2 summarizes the results from varying the learning rate hyper-parameter and suggest that learning rate can significantly affect the supervised learning process and resulting performance. Similarly, Table 3 shows the the result from varying the optimizer, indicating that the Adam optimizer yielded the best performance for the 3-layer network. Finally in Table 4, we show the impact of varying maximum tree depth and iteration on the Gradient Boosted Regressor model. For all models, the selected features were vectorized into 63 ($\approx 2^6$) dimensional records, which explains how the model with maximum depth 10 tended to perform better.
