@@ -179,11 +179,10 @@ We started our data experiments with the bias analysis as mentioned in the Metho
 
 We know from common sense that diagnosis and corresponding medical procedures would play an important role in the mean discharge costs. However, the large number of groups in the diagnosis hinders it from being an independent categorical variable for predicting the mean costs. One way to solve this problem is to use hierarchical modeling, which means we first split the categories into several large groups, model and do bias analysis and then the large groups are further broken down into low-level small groups and do the modeling and analysis correspondingly. This method needs deep medical knowledge and in fact, we don't need such intense information to do the bias analysis. Our aim is to find whether bias existing in the mean cost and find significant features as candidates for our predictive model. For the business application, the users won't have the professional diagnosis knowledge to use the predictive model.  Therefore, instead of a comprehensive diagnosis hierarchical model, we use a relatively simple approach: do the bias analysis for individual diagnosis category. Considering the diagnosis distribution in the Data Exploration section, this approach is reasonable actually. Although there are over 200 groups in the diagnosis feature, most of the groups have very low frequency.
 
-In the bias analysis, we experimented with top tour diagnosis categories: "Liveborn" ($>$ 9\% of the whole data), "Septicemia" ($\sim$5\%), "Hypertension" ($\sim$3\%) and "Osteoarthritis" ($\sim$3\%).  It is worth noticing that the patients of `Liveborn' are newborns, not the mothers. There is only one age category: between 0 and 17 and hence no possible age bias. 
+In the bias analysis, we experimented with top tour diagnosis categories: "Liveborn" ($>$ 9\% of the whole data), "Septicemia" ($\sim$5\%), "Hypertension" ($\sim$3\%) and "Osteoarthritis" ($\sim$3\%).  It is worth noticing that the patients of `Liveborn' are newborns, not the mothers. There is only one age category: between 0 and 17 and hence no possible age bias. Therefore, for Septicemia, Hypertension and Osteoarthritis, we did ANOVA with 10 features mentioned above while for "Liveborn", we used 9 features without "Age Group". 
 
-We took the top diagnosis category - `Liveborn' (over 9\% of the whole data) as an example to demonstrate the bias analysis.However, there is a possibility that there are gender biases among the newborns. To test for this, we used ANOVA to test for which features of records were significant in explaining the variance in healthcare costs. From our ANOVA analysis, we could see that all these ten features were significant in explaining the mean charges for `Liveborn'.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[t!]
+\begin{table}[]
 \small
 \begin{center}
 \label{anova}
@@ -202,13 +201,13 @@ mortality         & 3            & \textless{}2.2e-16 ***       \\ \hline
 surgical          & 1            & \textless{}2.2e-16 ***       \\ \hline
 \end{tabular}
 \end{center}
-\caption{ANOVA result for Septicemia in New York State. Significant codes: '***' 0.001.}
+\caption{ANOVA result for Septicemia in the New York State. Significant codes: '***' 0.001.}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+In Table. \ref{anova}, we show the ANOVA result for Septicemia in the New York State. The first column is the 10 variables, the second column is the degree of freedom (DoF) of each variable (DoF equals to the number of groups in a feature minus one. For example, there are 5 age groups and hence the DoF of age is 4.) and the third column is Pr($>$F) which is the p-value associated with the F statistic of corresponding variable. As mentioned in the Method section, the null hypothesis that the corresponding variable has no effect on the independent variable (here is the mean discharge cost) is evaluated with regard to this p-value. Since we choose p-value as 0.05 by convention, if a variable has Pr($>$F) less than 0.05, we would consider this variable as a significant feature of predicting the mean discharge cost. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[t!]
+\begin{table}[]
 \small
 \begin{center}
 \label{Tukey-race-birth}
@@ -227,7 +226,7 @@ Bronx           & 100            & 100            & 165.25         & 143.13     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[t!]
+\begin{table}[]
 \small
 \begin{center}
 \label{anova-gender-birth}
