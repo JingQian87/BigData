@@ -1,5 +1,5 @@
 library(bigmemory)
-data<-read.delim("~/Desktop/BigData_ProjectData/SPARCS-2017-hypertension-Bias.csv")
+data<-read.delim("~/Desktop/BigData_ProjectData/SPARCS-2017-osteoarthritis-Bias.csv")
 county_names<-unique(data$Hospital.County)
 # screen the variables with 1 level for each county
 flist<-c()
@@ -121,7 +121,7 @@ for (iname in county_names)
 }  
 colnames(avg2old)<-c("County","70 or Older",agelist)  
 
-write.csv(bias,"~/Desktop/BigData_ProjectData/hypertension-Bias-anova.csv")
-write.csv(avg2male,"~/Desktop/BigData_ProjectData/hypertension-avg2male-anova.csv")
-write.csv(avg2white,"~/Desktop/BigData_ProjectData/hypertension-avg2white-tukey.csv")
-write.csv(avg2old,"~/Desktop/BigData_ProjectData/hypertension-avg2old-tukey.csv")
+write.csv(bias,"~/Desktop/BigData_ProjectData/osteoarthritis-Bias-anova.csv")
+write.csv(avg2male,"~/Desktop/BigData_ProjectData/osteoarthritis-avg2male-anova.csv")
+write.csv(avg2white,"~/Desktop/BigData_ProjectData/osteoarthritis-avg2white-tukey.csv")
+write.csv(avg2old,"~/Desktop/BigData_ProjectData/osteoarthritis-avg2old-tukey.csv")

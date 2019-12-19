@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  19 DEC 2019 02:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  19 DEC 2019 17:17
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -552,12 +552,59 @@ Overfull \hbox (785.93623pt too wide) has occurred while \output is active
 
 
 ]
+Overfull \hbox (41.85712pt too wide) in paragraph at lines 466--520
+ [] 
+ []
+
+
+LaTeX Warning: Float too large for page by 4.13875pt on input line 522.
+
+[13
+
+
+]
+Overfull \hbox (785.93623pt too wide) has occurred while \output is active
+[] []|[] []
+ []
+
+[14
+
+
+]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 553.
+
+
+Overfull \hbox (785.93623pt too wide) has occurred while \output is active
+[] []|[] []
+ []
+
+[15
+
+
+
+]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 579.
+
+
+Overfull \hbox (785.93623pt too wide) has occurred while \output is active
+[] []|[] []
+ []
+
+[16
+
+
+
+]
 No file egpaper_final.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 849.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 849.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 985.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 985.
 (./egpaper_final.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 849.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 849.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 985.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 985.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -565,13 +612,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 849.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 985.
  ) 
 Here is how much of TeX's memory you used:
- 6416 strings out of 493089
- 92392 string characters out of 6134842
- 196992 words of memory out of 5000000
- 9741 multiletter control sequences out of 15000+600000
+ 6425 strings out of 493089
+ 92466 string characters out of 6134842
+ 217030 words of memory out of 5000000
+ 9742 multiletter control sequences out of 15000+600000
  34412 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  34i,10n,26p,1919b,358s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -588,10 +635,10 @@ xmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2015/texmf-dist
 e1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/tim
 es/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a
 .pfb>
-Output written on egpaper_final.pdf (12 pages, 1304937 bytes).
+Output written on egpaper_final.pdf (16 pages, 1317323 bytes).
 PDF statistics:
- 171 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
- 44 named destinations out of 1000 (max. 500000)
+ 193 PDF objects out of 1000 (max. 8388607)
+ 145 compressed objects within 2 object streams
+ 52 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
