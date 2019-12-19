@@ -31,10 +31,10 @@ import json
 
 # credentials
 # TODO: replace with your own credentials
-ACCESS_TOKEN = '1187095780026474496-lU7AOILHVdtAWndsNBrvkguIKgp8ft'     # your access token
-ACCESS_SECRET = '7sjhzmHUKlqAvOMKSOL5xCoJiXIA0lF5bYUsEFJzLFUKP'    # your access token secret
-CONSUMER_KEY = 'mtQlwa9hbUKvcpHy7RJGFF8K4'     # your API key
-CONSUMER_SECRET = 'nGHZfZPeBmohIpI6OKpSrAUL4r2lxEpAKPgjaPpk4bxY0ZOw8W'  # your API secret key
+ACCESS_TOKEN = ''     # your access token
+ACCESS_SECRET = ''    # your access token secret
+CONSUMER_KEY = ''     # your API key
+CONSUMER_SECRET = ''  # your API secret key
 
 # the tags to track
 tags = ['#', 'bigdata', 'spark', 'ai', 'movie']
